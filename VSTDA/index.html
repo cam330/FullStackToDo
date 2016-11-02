@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title></title>
+
+	<link rel="stylesheet" href="styles.css">
+
+<!-- bower:css -->
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<!-- endbower -->
+
+<!-- inject:css -->
+<!-- endinject -->
+</head>
+<body ng-controller="MainController as vm">
+
+<div class="ng-cloak">
+	<div id="enterDiv" class="col-sm-4 panel panel-info">
+		<div class="panel-heading">Add Todo Item</div>
+		<div class="panel-body">
+			<div class="col-sm-12">
+				<label>Text</label>
+				<input type="text" name="Text" class="form-control" ng-model="vm.toDoInput">
+			</div>
+			<div class="col-sm-12">
+				<label>Priority</label>
+				<select ng-model="vm.priority" class="form-control" required ng-options='option.value as option.name for option in vm.options'>
+				</select>
+			</div>
+		</div>
+		<div id="buttonBackground" class="col-sm-12 alight ">
+			<div id="buttonDiv" class="col-sm-offset-1 col-sm-4">
+				<button class="btn btn-primary btn-block" ng-click="vm.addText(vm.toDoInput, vm.priority)">Add Todo</button>
+			</div>
+			<div id="buttonDiv" class="col-sm-offset-1 col-sm-4" ng-show="vm.changeButton">
+				<button class="btn btn-primary btn-block" ng-click="vm.commitEdits(vm.toDoInput, vm.priority)">Change</button>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="col-sm-8">
+			<div id="sortButtons">
+				<button class="btn btn-primary" ng-click="sortType = 'priority'">Order by higheset priority</button>
+				<button class="btn btn-primary" ng-click="sortType = '-priority'">Order by lowest priority</button>
+				<button class="btn btn-primary" ng-click="sortType = 'item'">Order alphabetically</button>
+			</div>
+			<div>
+				<table class="table table-bordered" ng-model="vm.theTable">
+					<!-- <tr ng-repeat="data in items | orderBy:sortType" ng-class="{'bg-info': data.value == '3', 'bg-warning': data.value == '2', 'bg-danger': data.value == '1'}"> -->
+					<tr ng-repeat="todos in vm.todoArray | orderBy:sortType" ng-class="{'bg-info': todos.priority == '3', 'bg-warning': todos.priority == '2', 'bg-danger': todos.priority == '1'}">
+						<td class="ng-cloak">
+						<div class="col-sm-12">
+							<div class="col-sm-4">
+							{{todos.item}}
+							</div>
+							<div class="col-sm-offset-4 col-sm-4" align="right">
+							<button class="btn btn-success" ng-click="vm.editItem(todos.item, todos.priority, todos.toDoEntryId, $index)">EDIT</button>
+							<button class="btn btn-danger" ng-click="vm.deleteItem(todos.toDoEntryId, $index)">DELETE</button>
+							</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!-- endbower -->
+
+<!-- inject:js -->
+<script src="/app/app.js"></script>
+<script src="/app/toDo.controller.js"></script>
+<script src="/app/toDo.factory.js"></script>
+<!-- endinject -->
+
+<!-- <script src="index.js"></script> -->
+
+</body>
+</html>

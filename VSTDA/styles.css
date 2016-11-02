@@ -1,0 +1,28 @@
+.ng-cloak
+{
+	display: none;
+}
+body
+{
+	padding: 30px;
+}
+#enterDiv
+{
+	padding: 0px;
+}
+#buttonDiv
+{
+	padding: 10px;
+}
+#buttonBackground
+{
+	background-color: #ededed;
+}
+#todoTitle
+{
+	text-align: center;
+}
+#sortButtons
+{
+	padding-bottom: 15px;
+}

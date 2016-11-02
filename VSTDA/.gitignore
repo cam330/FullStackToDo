@@ -1,0 +1,7 @@
+bower_components/
+ng-snippets/
+node_modules
+bower.json
+gulpfile.js
+index.js
+package.json
